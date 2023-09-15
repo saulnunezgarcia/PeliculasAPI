@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using PeliculasAPI;
 using PeliculasAPI.Helpers;
@@ -13,6 +14,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
     builder.Configuration.GetConnectionString("DefaultConnection"))); //el builder.Configuration es importante
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
+
+builder.Services.Configure<IISServerOptions>(options =>
+{
+    options.MaxRequestBodySize = int.MaxValue;
+});
+
+builder.Services.Configure<FormOptions>(x =>
+{
+    x.ValueLengthLimit = int.MaxValue;
+    x.MultipartBodyLengthLimit = int.MaxValue; // if don't set default value is: 128 MB
+    x.MultipartHeadersLengthLimit = int.MaxValue;
+});
 
 var app = builder.Build();
 

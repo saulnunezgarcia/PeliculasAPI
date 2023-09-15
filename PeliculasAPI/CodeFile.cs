@@ -32,3 +32,6 @@
 //ahi. Finalmente, se trabaja con program.cs para inicializar los mapeos con este comando 
 
 //builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
+
+
+//Cuando se añada una nueva tabla, se debe añadir su entidad, luego a applicationDbContext y la migracion en la consola 
